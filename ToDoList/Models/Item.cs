@@ -8,15 +8,8 @@ namespace ToDoList.Models
   {
     public string Description { get; set; }
     public int Id { get; set; }
-    // public int Priority { get; set; }
-    private static List<Item> _instances = new List<Item> { };
+    // private static List<Item> _instances = new List<Item> { };
 
-    // public Item(string description)
-    // {
-    //   Description = description;
-    //   _instances.Add(this);
-    //   Id = _instances.Count;
-    // }
     public Item(string description)
     {
       Description = description;
@@ -64,13 +57,6 @@ namespace ToDoList.Models
         conn.Dispose();
       }
     }
-
-    // public Item(string description, int priority)
-    //   : this(description)
-    // {
-    //   Priority = priority;
-    // }
-
     public static List<Item> GetAll()
     {
       List<Item> allItems = new List<Item> { };
