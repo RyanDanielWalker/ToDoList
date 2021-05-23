@@ -1,8 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using ToDoList.Models;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 
 namespace ToDoList.Controllers
 {
@@ -36,10 +36,12 @@ namespace ToDoList.Controllers
 
     public ActionResult Details(int id)
     {
-      Category thisCategory = _db.Categories.FirstOrDefault(category => category.CategoryId == id);
+      var thisCategory = _db.Categories
+          .Include(category => category.JoinEntities)
+          .ThenInclude(join => join.Item)
+          .FirstOrDefault(category => category.CategoryId == id);
       return View(thisCategory);
     }
-
     public ActionResult Edit(int id)
     {
       var thisCategory = _db.Categories.FirstOrDefault(category => category.CategoryId == id);
